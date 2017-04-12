@@ -48,7 +48,7 @@ deploy:
   - provider: GitHub
     auth_token:
       # maelvalais ciphered credetials using appveyor encryption
-      secure: "EWLXzbe9BdCFxAyFoz+kUJOZNyLLIpeCcXrl+aisecK9HMin6aAIt3wFaGSqvWPS"
+      secure: "ex/7uW5GQE7ZPIFyBcb5qvmijhfxS0sEcAzzbfyIIB9kE9MwSogbgZxUFh/VkO0k"
     artifact: /yices.zip/
     on:
       appveyor_repo_tag: true       # deploy on tag push only
