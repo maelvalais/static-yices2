@@ -2,8 +2,8 @@ set -e
 
 curl -L -O https://gmplib.org/download/gmp/gmp-6.1.2.tar.gz2
 curl -L -O https://gmplib.org/download/gmp/gmp-6.1.2.tar.gz2.sig
-gpg --keyserver wwwkeys.pgp.net --recv-keys 28C67298
-gpg --verify gmp-6.1.2.tar.gz2.sig gmp-6.1.2.tar.gz2
+#gpg --keyserver wwwkeys.pgp.net --recv-keys 28C67298
+#gpg --verify gmp-6.1.2.tar.gz2.sig gmp-6.1.2.tar.gz2
 
 tar -jxvf gmp-6.1.2.tar.gz2
 mkdir gmp-static-dist
