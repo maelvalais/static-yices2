@@ -6,10 +6,13 @@ curl -L -O https://gmplib.org/download/gmp/gmp-6.1.2.tar.gz2.sig
 #gpg --verify gmp-6.1.2.tar.gz2.sig gmp-6.1.2.tar.gz2
 
 tar -jxvf gmp-6.1.2.tar.gz2
-mkdir gmp-static-dist
+mkdir gmp-static-dist gmp-shared-dist
 
 cd gmp-6.1.2
 ./configure --prefix=$PWD/../gmp-static-dist --disable-shared --enable-static CC=i686-w64-mingw32-gcc --host=i686-w64-mingw32 --build=i686-pc-cygwin ABI=32
+make
+make install
+./configure --prefix=$PWD/../gmp-shared-dist --enable-shared --disable-static CC=i686-w64-mingw32-gcc --host=i686-w64-mingw32 --build=i686-pc-cygwin ABI=32
 make
 make install
 cd ..
@@ -22,7 +25,11 @@ mv yices-* yices
 mkdir yices-dist
 
 cd yices
-./configure --prefix=$PWD/../yices-dist --build=i686-pc-mingw32 CC=i686-w64-mingw32-gcc LD=i686-w64-mingw32-ld STRIP=i686-w64-mingw32-strip RANLIB=i686-w64-mingw32-ranlib --with-static-gmp=$PWD/../gmp-static-dist/lib/libgmp.a --with-static-gmp-include-dir=$PWD/../gmp-static-dist/include/ CPPFLAGS=-I/usr/i686-w64-mingw32/sys-root/mingw/include LDFLAGS=-L/usr/i686-w64-mingw32/sys-root/mingw/lib/
+./configure --prefix=$PWD/../yices-dist --build=i686-pc-mingw32 CC=i686-w64-mingw32-gcc \
+LD=i686-w64-mingw32-ld STRIP=i686-w64-mingw32-strip RANLIB=i686-w64-mingw32-ranlib \
+--with-static-gmp=$PWD/../gmp-static-dist/lib/libgmp.a \
+--with-static-gmp-include-dir=$PWD/../gmp-static-dist/include/ \
+CPPFLAGS=-I$PWD/../gmp-shared-dist/include LDFLAGS=-L$PWD/../gmp-shared-dist/lib
 make static-lib OPTION=mingw32
 make install OPTION=mingw32
 cd ..
