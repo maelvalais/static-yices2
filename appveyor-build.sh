@@ -22,4 +22,4 @@ make static-lib OPTION=mingw32
 make install OPTION=mingw32
 cd ..
 
-zip yices.zip yices-dist
+tar -xzf yices.tar.gz yices-dist

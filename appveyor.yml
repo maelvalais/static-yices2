@@ -33,13 +33,13 @@ install:
   # Opam on Windows: http://fdopen.github.io/opam-repository-mingw
   - javac -version
   - ps: 'Invoke-WebRequest http://cygwin.com/$env:CYG_SETUP -OutFile "$env:CYG_SETUP"'
-  - '%CYG_SETUP% --quiet-mode --no-shortcuts --only-site --root "%CYG_ROOT%" --site "%CYG_MIRROR%" --local-package-dir "%CYG_CACHE%" --packages rsync,patch,diffutils,curl,make,unzip,git,m4,perl,mingw64-i686-gcc-core,gperf --upgrade-also'
+  - '%CYG_SETUP% --quiet-mode --no-shortcuts --only-site --root "%CYG_ROOT%" --site "%CYG_MIRROR%" --local-package-dir "%CYG_CACHE%" --packages rsync,patch,diffutils,curl,make,unzip,git,m4,perl,mingw64-i686-gcc-core,gperf,xz --upgrade-also'
 
 build_script:
   - '%CYG_BASH% -ex "appveyor-build.sh"'
 
 artifacts:
-  - path: yices.zip
+  - path: yices.tar.gz
 
 skip_tags: false
 
@@ -49,7 +49,7 @@ deploy:
     auth_token:
       # maelvalais ciphered credetials using appveyor encryption
       secure: "ex/7uW5GQE7ZPIFyBcb5qvmijhfxS0sEcAzzbfyIIB9kE9MwSogbgZxUFh/VkO0k"
-    artifact: /yices.zip/
+    artifact: /yices.tar.gz/
     on:
       appveyor_repo_tag: true       # deploy on tag push only
 
